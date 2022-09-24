@@ -48,3 +48,18 @@ with command : lsblk
 <img width="1376" alt="Screen Shot 2022-09-24 at 3 21 51 PM" src="https://user-images.githubusercontent.com/112595648/192103077-81f82395-7f0f-4b84-80fe-2df080e4c8a3.png">
 : sudo vgdisplay -v 
 <img width="1103" alt="Screen Shot 2022-09-24 at 3 22 51 PM" src="https://user-images.githubusercontent.com/112595648/192103115-771b844a-0044-4ee3-a1b3-a3b515cf425c.png">
+#  Format the logical volumes with ext4 filesystem
+this is achieved with the command 
+:
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+
+# Create /var/www/html directory to store website files
+this is achieved with command : sudo mkdir -p /var/www/html
+#  Create /home/recovery/logs to store backup of log data
+This is achieved with the command : sudo mkdir -p /home/recovery/logs
+# Mount /var/www/html on apps-lv logical volume
+This is achieved the command : sudo mount /dev/webdata-vg/apps-lv /var/www/html/
+Use rsync utility to backup all the files in the log directory /var/log into /home/recovery/logs
+with the command : sudo rsync -av /var/log/. /home/recovery/logs/
+

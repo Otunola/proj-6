@@ -70,6 +70,12 @@ sudo rsync -av /home/recovery/logs/. /var/log
 : df -h
 
 <img width="1107" alt="Screen Shot 2022-09-24 at 10 37 52 PM" src="https://user-images.githubusercontent.com/112595648/192119588-8afb4574-7710-48e8-b269-79cf22089814.png">
-
+# Update /etc/fstab file so that even after restart of the server, the configuration and mount will stay
+This is done by updating the UUID of the lological volumes shown below in the /etc/fstab as shown
+run the command : sudo blkid
+<img width="1031" alt="Screen Shot 2022-09-24 at 11 08 24 PM" src="https://user-images.githubusercontent.com/112595648/192120293-7c25f0ed-abf9-42ff-9d96-716fb66b7ffb.png">
+then copy the UUID of the two logical volumes and update them on the /etc/fstab as shown
+: run vi /etc/fstab
+<img width="1093" alt="Screen Shot 2022-09-24 at 11 10 03 PM" src="https://user-images.githubusercontent.com/112595648/192120323-19a8efd9-a5ed-400c-9a36-cbb0b3a493d8.png">
 
 

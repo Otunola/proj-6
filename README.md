@@ -15,4 +15,19 @@ as shown below
 <img width="578" alt="Screen Shot 2022-09-24 at 2 46 36 PM" src="https://user-images.githubusercontent.com/112595648/192101440-b40772c8-44fe-41a2-888f-8d7880e43c4d.png">
 same was done for xvdg and xvdh with commands
 sudo gdisk /dev/xvdg
+
 sudo gdisk /dev/xvdh
+# Use lsblk utility to view the newly configured partition on each of the 3 disks.
+command : lsblk
+<img width="597" alt="Screen Shot 2022-09-24 at 2 58 00 PM" src="https://user-images.githubusercontent.com/112595648/192101923-8c2f6c79-64a1-40e6-8fbb-f05c56074a67.png">
+
+then we need to Install lvm2 package using sudo yum install lvm2. Run sudo lvmdiskscan command to check for available partitions.
+now scan for the available partitions with the commad : sudo lvmdiskscan
+<img width="581" alt="Screen Shot 2022-09-24 at 3 01 16 PM" src="https://user-images.githubusercontent.com/112595648/192102088-9abb17e4-5e0d-43e4-8dca-22846a597614.png">
+as seen above, the 3 partitions are present.
+# Create Physical Volumes to be used as LVM
+we use the command pvcreate as on each of the partitions as shown below
+sudo pvcreate /dev/xvdf1
+sudo pvcreate /dev/xvdg1
+sudo pvcreate /dev/xvdh1
+![image](https://user-images.githubusercontent.com/112595648/192102314-3f86f5b2-6ba5-4695-a5a1-c04d2fdd4f7d.png)

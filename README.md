@@ -31,3 +31,20 @@ sudo pvcreate /dev/xvdf1
 sudo pvcreate /dev/xvdg1
 sudo pvcreate /dev/xvdh1
 ![image](https://user-images.githubusercontent.com/112595648/192102314-3f86f5b2-6ba5-4695-a5a1-c04d2fdd4f7d.png)
+# Verify the physical volumes are created with command 
+: sudo pvs
+as shown
+<img width="1403" alt="Screen Shot 2022-09-24 at 3 09 02 PM" src="https://user-images.githubusercontent.com/112595648/192102498-55ddb9a1-32a7-4875-90db-615b8530f046.png">
+# Add all the 3 Physical Volumes to create a volume group
+This can be achieved with vgcreate utility. let name the volume group webdata-vg
+: sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1
+# NOw create Logical Volumes from the created volume groups
+from the manual, we create 2 logical volumes of 14g each with the commad as shown
+: 
+sudo lvcreate -n apps-lv -L 14G webdata-vg
+sudo lvcreate -n logs-lv -L 14G webdata-vg
+# verify the entire setup
+with command : lsblk
+<img width="1376" alt="Screen Shot 2022-09-24 at 3 21 51 PM" src="https://user-images.githubusercontent.com/112595648/192103077-81f82395-7f0f-4b84-80fe-2df080e4c8a3.png">
+: sudo vgdisplay -v 
+<img width="1103" alt="Screen Shot 2022-09-24 at 3 22 51 PM" src="https://user-images.githubusercontent.com/112595648/192103115-771b844a-0044-4ee3-a1b3-a3b515cf425c.png">

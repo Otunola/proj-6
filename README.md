@@ -78,4 +78,14 @@ then copy the UUID of the two logical volumes and update them on the /etc/fstab 
 : run vi /etc/fstab
 <img width="1093" alt="Screen Shot 2022-09-24 at 11 10 03 PM" src="https://user-images.githubusercontent.com/112595648/192120323-19a8efd9-a5ed-400c-9a36-cbb0b3a493d8.png">
 
+Will test the coniguration with commnd
+sudo mount -a
+which should show no error
+df -h
+<img width="998" alt="Screen Shot 2022-09-24 at 11 18 43 PM" src="https://user-images.githubusercontent.com/112595648/192120548-355383b6-4959-4ac9-a9c1-bc7bd202b297.png">
+
+# Prepare the database server
+repeats steps done on the web-server, by creating the 3 addtional volumes, creating physical volumes, ceating volume groups and creating logical volumes. but this time on the db-server only one logical volume is created and allocated a 20g.
+logical volume named db-lv
+Now we creat a mount point with command : sudo mkdir /db
 

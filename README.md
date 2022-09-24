@@ -62,4 +62,10 @@ This is achieved with the command : sudo mkdir -p /home/recovery/logs
 This is achieved the command : sudo mount /dev/webdata-vg/apps-lv /var/www/html/
 Use rsync utility to backup all the files in the log directory /var/log into /home/recovery/logs
 with the command : sudo rsync -av /var/log/. /home/recovery/logs/
+# Mount /var/log on logs-lv logical volume.
+this is achieved with the command : sudo mount /dev/webdata-vg/logs-lv /var/log
+# Restore log files back into /var/log directory
+sudo rsync -av /home/recovery/logs/. /var/log
+
+
 

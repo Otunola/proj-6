@@ -88,4 +88,34 @@ df -h
 repeats steps done on the web-server, by creating the 3 addtional volumes, creating physical volumes, ceating volume groups and creating logical volumes. but this time on the db-server only one logical volume is created and allocated a 20g.
 logical volume named db-lv
 Now we creat a mount point with command : sudo mkdir /db
+# MAke a file system before mounting
+this is achieved with the comand: sudo mkfs.ext4 /dev/vg-database/db-lv
+# now mount with the command below
+: sudo mount /dev/vg-database/db-lv /db
+confirm the mount with comand : df -h
+<img width="1019" alt="Screen Shot 2022-09-24 at 11 53 21 PM" src="https://user-images.githubusercontent.com/112595648/192121320-bb6de76f-dd5c-48ff-8550-647b8ddd98d0.png">
 
+make the mount persistent by putting the UUID in the /etc/fstab as shown below
+<img width="1119" alt="Screen Shot 2022-09-24 at 11 56 44 PM" src="https://user-images.githubusercontent.com/112595648/192121398-39dd73ff-f3c3-43ce-874a-e6e9bec7fa05.png">
+
+<img width="462" alt="Screen Shot 2022-09-25 at 12 02 07 AM" src="https://user-images.githubusercontent.com/112595648/192121531-531470cf-2fe3-4ce1-8f2c-acf0b89effd4.png">
+
+test the config with command : sudo mount -a
+# We now need to install wordpress on the EC2 server
+first we update the repository with command : sudo yum -y update
+2. install twget, apache and all its dependancies 
+3. : sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
+4. start apache with commands
+5. 
+sudo systemctl enable httpd
+sudo systemctl start httpd
+INstall php and all its dependancies
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+sudo yum module list php
+sudo yum module reset php
+sudo yum module enable php:remi-7.4
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+setsebool -P httpd_execmem 1

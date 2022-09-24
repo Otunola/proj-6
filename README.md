@@ -66,6 +66,10 @@ with the command : sudo rsync -av /var/log/. /home/recovery/logs/
 this is achieved with the command : sudo mount /dev/webdata-vg/logs-lv /var/log
 # Restore log files back into /var/log directory
 sudo rsync -av /home/recovery/logs/. /var/log
+# Check the mount
+: df -h
+
+<img width="1107" alt="Screen Shot 2022-09-24 at 10 37 52 PM" src="https://user-images.githubusercontent.com/112595648/192119588-8afb4574-7710-48e8-b269-79cf22089814.png">
 
 
 

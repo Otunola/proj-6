@@ -119,3 +119,19 @@ sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 setsebool -P httpd_execmem 1
+
+
+
+sudo mysql_secure_installation
+then create database, database user and then grate all privileges with the following commands:
+
+sudo mysql
+CREATE DATABASE wordpress;
+CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
+GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+exit
+# now Configure WordPress to connect to remote database.
+  this is achieved by opening the port on the security group of the database ec2 instance as shown below![Screen Shot 2022-09-25 at 1 33 52 AM](https://user-images.githubusercontent.com/112595648/192123589-df461124-7d48-4551-a064-ac18193f69f0.png)
+

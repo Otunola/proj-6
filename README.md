@@ -119,7 +119,34 @@ sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 setsebool -P httpd_execmem 1
+# Restart the Apache
+done with the commands : sudo systemctl enable httpd
+sudo systemctl start httpd
+# Install Php and all its dependancies
+achieved withcommands below:
+ mkdir wordpress
+  cd   wordpress
+  sudo wget http://wordpress.org/latest.tar.gz
+  sudo tar xzvf latest.tar.gz
+  sudo rm -rf latest.tar.gz
+  cp wordpress/wp-config-sample.php wordpress/wp-config.php
+  cp -R wordpress /var/www/html/
+  # Configure SELinux Policies
 
+  sudo chown -R apache:apache /var/www/html/wordpress
+  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+  sudo setsebool -P httpd_can_network_connect=1
+  
+  # Install MySQL on your DB Server EC2
+  first we do a yum update and then the mysql server installation with the following commands :
+  sudo yum update
+sudo yum install mysql-server
+then we restart the service and enable with the commands:
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
+
+then we check the status with the command
+udo systemctl status mysqld
 
 
 sudo mysql_secure_installation
@@ -134,4 +161,11 @@ SHOW DATABASES;
 exit
 # now Configure WordPress to connect to remote database.
   this is achieved by opening the port on the security group of the database ec2 instance as shown below![Screen Shot 2022-09-25 at 1 33 52 AM](https://user-images.githubusercontent.com/112595648/192123589-df461124-7d48-4551-a064-ac18193f69f0.png)
+
+  # Install MySQL client and test that you can connect from your Web Server to your DB server by using mysql-client
+  this is achieved with the command : sudo yum install mysql
+: sudo mysql -h 172.31.27.55 -u wordpress -p
+  <img width="567" alt="Screen Shot 2022-09-25 at 1 48 30 AM" src="https://user-images.githubusercontent.com/112595648/192123643-0176afff-d91c-4b8c-b64f-084b940bed5f.png">
+
+  <img width="570" alt="Screen Shot 2022-09-25 at 1 49 56 AM" src="https://user-images.githubusercontent.com/112595648/192123660-5a5254bf-0f8e-43ba-a54d-9b0fdf57be09.png">
 
